@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  php-apache-environment:
+    container_name: php-apache
+    build: 
+      context: ./php                   
+      dockerfile: Dockerfile           
+    depends_on:
+      - db                             
+    volumes:
+      - ./php/src:/var/www/html/       ## directory ของ ไฟล์
+    ports:
+      - 8080:80                        ## ตั้งค่า apache server ไว้ที่ 80 โดยเรียกใช้งานด้วย post 8080
+
+## การติดตั้ง Mysql ผ่าน Dockerfile
+  db:
+    container_name: db               # ชื่อ containers
+    image: mysql                     # ฐานช้อมูล
+    restart: always                  # กำหนด restart หากมีการเปลี่ยนแปลงตัว containers
+
+    environment:      # กำหนด   
+      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD        # รหัสผ่านMysql
+      MYSQL_DATABASE: MYSQL_DATABASE                  # ชื่อฐานข้อมูล
+      MYSQL_USER: MYSQL_USER                          # username     
+      MYSQL_PASSWORD: MYSQL_PASSWORD                  # password
+
+    ports:
+      - "9906:3306"                             # post สำหรับ Mysql 
+
+## การติดตั้ง phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin 
+    ports:
+      - "8000:80" ## โดยเรียกใช้งานด้วย post 8000
+    restart: always
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+      
