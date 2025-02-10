@@ -1,3 +1,5 @@
+-- ฐานข้อมูลเบื้องต้น
+
 drop table if exists `users`;
 create table users (
 	id int PRIMARY KEY AUTO_INCREMENT,
