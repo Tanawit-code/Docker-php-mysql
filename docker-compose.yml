@@ -15,11 +15,11 @@ services:
 ## การติดตั้ง Mysql ผ่าน Dockerfile
   db:
     container_name: db               # ชื่อ containers
-    image: mysql                     # ฐานช้อมูล
+    image: mysql                     # ฐานข้ออมูล
     restart: always                  # กำหนด restart หากมีการเปลี่ยนแปลงตัว containers
 
     environment:      # กำหนด   
-      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD        # รหัสผ่านMysql
+      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD        # รหัสผ่าน Mysql
       MYSQL_DATABASE: MYSQL_DATABASE                  # ชื่อฐานข้อมูล
       MYSQL_USER: MYSQL_USER                          # username     
       MYSQL_PASSWORD: MYSQL_PASSWORD                  # password
